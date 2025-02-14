@@ -1,5 +1,4 @@
 name: CD Pipeline
-
 on:
   push:
     branches: [main]
@@ -7,6 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -14,10 +14,13 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.AWS_HOST }}
-          username: ${{ secrets.AWS_USER }}
+          username: ${{ secrets.AWS_USER }}  # Ensure this is "ubuntu"
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             cd ~/fastapi-app
             git pull origin main
+            docker-compose down
+            docker-compose up -d --build
+
             docker-compose down
             docker-compose up -d --build
