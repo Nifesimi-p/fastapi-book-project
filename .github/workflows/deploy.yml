@@ -17,9 +17,8 @@ jobs:
           username: ${{ secrets.AWS_USER }}  # Ensure this is "ubuntu"
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
-            cd ~/fastapi-app
+            cd ~/fastapi-book-project
             git pull origin main
-            docker-compose down
-            docker-compose up -d --build
+            sudo systemctl restart fastapi
 
            
