@@ -39,7 +39,7 @@ async def get_book(book_id: int):
     book = db.books.get(book_id)  # Retrieve the book by book_id from the in-memory database
     if book:
         return book  # Return the book details if found
-    raise HTTPException(status_code=404, detail="Book not found")
+    raise HTTPException(status_code=404, detail="Book not found this is a test")
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_book(book: Book):
